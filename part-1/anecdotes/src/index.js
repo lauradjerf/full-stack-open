@@ -15,11 +15,22 @@ const App = (props) => {
     setSelected(Math.floor(Math.random() * 6));
   };
 
+  const handleVote = () => {
+    const copy = anecdoteVote.slice();
+    copy[selected] += 1;
+    setAnecdoteVote(copy);
+  };
+
   return (
     <div>
       {props.anecdotes[selected]}
-      {props.anecdotes[anecdoteVote]}
+      <p>
+        {'Has '}
+        {anecdoteVote[selected]}
+        {' votes'}
+      </p>
       <br />
+      <Button text="Vote" onClick={handleVote} />
       <Button text="Next anecdote" onClick={randomize} />
     </div>
   );
