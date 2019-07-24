@@ -19,6 +19,11 @@ const StatisticItem = ({ text, value }) => (
 
 const StatisticList = ({good, neutral, bad}) => {
   const count = good + neutral + bad;
+
+  if (count === 0) {
+    return <p>No feedback given</p>;
+  }
+
   const average = (good - bad) / count;
   const positive = `${good / count * 100}%`;
   return (
