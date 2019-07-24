@@ -10,14 +10,13 @@ const Button = ({ text, onClick }) => (
 );
 
 const StatisticItem = ({ text, value }) => (
-  <p>
-    {text}
-    {' '}
-    {value}
-  </p>
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 );
 
-const StatisticList = ({good, neutral, bad}) => {
+const StatisticList = ({ good, neutral, bad }) => {
   const count = good + neutral + bad;
 
   if (count === 0) {
@@ -25,16 +24,18 @@ const StatisticList = ({good, neutral, bad}) => {
   }
 
   const average = (good - bad) / count;
-  const positive = `${good / count * 100}%`;
+  const positive = `${(good / count) * 100}%`;
   return (
-    <div>
-      <StatisticItem text="Good" value={good} />
-      <StatisticItem text="Neutral" value={neutral} />
-      <StatisticItem text="Bad" value={bad} />
-      <StatisticItem text="All" value={count} />
-      <StatisticItem text="Average" value={average} />
-      <StatisticItem text="Positive" value={positive} />
-    </div>
+    <table>
+      <tbody>
+        <StatisticItem text="Good" value={good} />
+        <StatisticItem text="Neutral" value={neutral} />
+        <StatisticItem text="Bad" value={bad} />
+        <StatisticItem text="All" value={count} />
+        <StatisticItem text="Average" value={average} />
+        <StatisticItem text="Positive" value={positive} />
+      </tbody>
+    </table>
   );
 };
 
