@@ -9,13 +9,29 @@ const Button = ({ text, onClick }) => (
   </button>
 );
 
-const Statistics = ({ text, value }) => (
+const StatisticItem = ({ text, value }) => (
   <p>
     {text}
     {' '}
     {value}
   </p>
 );
+
+const StatisticList = ({good, neutral, bad}) => {
+  const count = good + neutral + bad;
+  const average = (good - bad) / count;
+  const positive = `${good / count * 100}%`;
+  return (
+    <div>
+      <StatisticItem text="Good" value={good} />
+      <StatisticItem text="Neutral" value={neutral} />
+      <StatisticItem text="Bad" value={bad} />
+      <StatisticItem text="All" value={count} />
+      <StatisticItem text="Average" value={average} />
+      <StatisticItem text="Positive" value={positive} />
+    </div>
+  );
+};
 
 const App = () => {
   // tallenna napit omaan tilaansa
@@ -24,7 +40,6 @@ const App = () => {
   const [bad, setBad] = useState(0);
 
   const handleGoodClick = () => {
-    console.log(good);
     setGood(good + 1);
   };
 
@@ -43,9 +58,7 @@ const App = () => {
       <Button text="Neutral" onClick={handleNeutralClick} />
       <Button text="Bad" onClick={handleBadClick} />
       <Heading heading="Statistics" />
-      <Statistics text="Good" value={good} />
-      <Statistics text="Neutral" value={neutral} />
-      <Statistics text="Bad" value={bad} />
+      <StatisticList good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
