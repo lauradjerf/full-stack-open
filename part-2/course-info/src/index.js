@@ -5,6 +5,7 @@ const Course = ({ course }) => (
   <div>
     <Header course={course} />
     <Content parts={course.parts} />
+    <Total parts={course.parts} />
   </div>
 );
 
@@ -27,14 +28,18 @@ const Content = ({ parts }) => {
   return <div>{rows()}</div>;
 };
 
-// const Total = props => (
-//   <div>
-//     <p>
-//       {'Number of exercises '}
-//       {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
-//     </p>
-//   </div>
-// );
+const Total = ({ parts }) => {
+  const amounts = parts.map(part => part.exercises);
+  const sum = amounts.reduce((total, amount) => total + amount);
+  return (
+    <div>
+      <p>
+        {'Number of exercises '}
+        {sum}
+      </p>
+    </div>
+  );
+};
 
 const App = () => {
   const course = {
@@ -55,6 +60,11 @@ const App = () => {
         exercises: 14,
         id: 3,
       },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4,
+      },
     ],
   };
 
@@ -66,4 +76,3 @@ const App = () => {
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
-
